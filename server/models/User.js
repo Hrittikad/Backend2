@@ -7,12 +7,11 @@ const userSchema = new mongoose.Schema({
   image: { type: String, required: true },
   role: { type: String, enum: ["user", "Admin"], default: "user" },
   recentSearchedCourse: {
-    type: [String],
-    required: true,
-    default: []
-  },
+  type: [String],
+  default: []
+}
 }, { timestamps: true });
 
 const User = mongoose.model('User', userSchema);
 
-export default User;   // <-- export default for ES Module
+export default User;  

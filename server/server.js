@@ -5,7 +5,10 @@ import cors from "cors";
 import connectDB from "./configs/db.js";
 import { clerkMiddleware } from '@clerk/express'
 import clerkWebhooks from "./controllers/clerkWebhooks.js";
-import { connect } from "mongoose";
+import userRouter from "./routes/userRoutes.js";
+import courseRouter from "./routes/courseRoutes.js";
+import buyRoutes from "./routes/buyRoutes.js"; 
+import mongoose from "mongoose";    
 
 connectDB();
 
@@ -21,7 +24,12 @@ app.use(clerkMiddleware())
 app.use("/api/clerk", clerkWebhooks);
 
 
-app.get('/', (req, res) => res.send("API is working FINE."));
+app.get('/', (req, res) => res.send("API is working Fine."));
+
+app.use('/api/user', userRouter);
+app.use('/api/course', courseRouter);
+app.use("/api", buyRoutes);
+
 
 const PORT = process.env.PORT || 4000;
 
